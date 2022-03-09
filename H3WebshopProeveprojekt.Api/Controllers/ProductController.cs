@@ -19,13 +19,21 @@ namespace H3WebshopProeveprojekt.Api.Controllers
         }
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-
         public async Task<IActionResult> GetAllProducts()
         {
             try
             {
                 List<ProductResponse> productResponse = await _productService.GetAllProducts();
+                if (productResponse == null)
+                {
+                    return Problem("The value was null, this was unexpected.");
+                }
+                if (productResponse.Count == 0)
+                {
+                    return NoContent();
+                }
                 return Ok(productResponse);
             }
             catch (Exception ex)

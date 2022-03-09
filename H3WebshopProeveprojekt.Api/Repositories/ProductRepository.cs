@@ -9,6 +9,10 @@ namespace H3WebshopProeveprojekt.Api.Repositories
     public interface IProductRepository
     {
         Task<List<Product>> GetAllProducts();
+        Task<Product> GetProductById(int productId);
+        Task<Product> InsertProduct(Product product);
+        Task<Product> UpdateProduct(int productId,Product product);
+        Task<Product> DeleteProduct(int productId);
     }
     public class ProductRepository : IProductRepository
     {
@@ -18,11 +22,38 @@ namespace H3WebshopProeveprojekt.Api.Repositories
         {
             _context = context;
         }
+
+        public Task DeleteProductById(int productId)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<List<Product>> GetAllProducts()
         {
             return await _context.Product
                 .Include(p => p.Category)
                 .ToListAsync();
+        }
+
+        public async Task<Product> GetProductById(int productId)
+        {
+            return await _context.Product
+                .FirstOrDefaultAsync(product => product.Id == productId);
+        }
+
+        public Task<Product> InsertProduct(Product product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Product> UpdateProduct(int productId, Product product)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public Task<Product> DeleteProduct(int productId)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
