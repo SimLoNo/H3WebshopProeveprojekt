@@ -26,7 +26,7 @@ namespace H3WebshopProeveprojekt.Api.Controllers
             try
             {
                 List<ProductResponse> productResponse = await _productService.GetAllProducts();
-                return Ok();
+                return Ok(productResponse);
             }
             catch (Exception ex)
             {

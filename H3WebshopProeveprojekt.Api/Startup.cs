@@ -1,4 +1,5 @@
 using H3WebshopProeveprojekt.Api.Database;
+using H3WebshopProeveprojekt.Api.Repositories;
 using H3WebshopProeveprojekt.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,6 +32,7 @@ namespace H3WebshopProeveprojekt.Api
         {
 
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
             services.AddDbContext<H3WebshopProeveprojektContext>(
                 x => x.UseSqlServer(Configuration.GetConnectionString("Default")));

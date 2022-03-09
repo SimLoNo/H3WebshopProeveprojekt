@@ -1,4 +1,6 @@
-﻿namespace H3WebshopProeveprojekt.Api.DTO
+﻿using H3WebshopProeveprojekt.Api.Database.Entities;
+
+namespace H3WebshopProeveprojekt.Api.DTO
 {
     public class ProductResponse
     {
@@ -9,6 +11,8 @@
 
         public int DiscountPercentage { get; set; }
 
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
     }
 }

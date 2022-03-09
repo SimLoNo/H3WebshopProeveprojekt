@@ -1,5 +1,8 @@
-﻿using H3WebshopProeveprojekt.Api.DTO;
+﻿using H3WebshopProeveprojekt.Api.Database.Entities;
+using H3WebshopProeveprojekt.Api.DTO;
+using H3WebshopProeveprojekt.Api.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace H3WebshopProeveprojekt.Api.Services
@@ -14,6 +17,12 @@ namespace H3WebshopProeveprojekt.Api.Services
     }
     public class ProductService : IProductService
     {
+        private readonly IProductRepository _repository;
+
+        public ProductService(IProductRepository repository)
+        {
+            _repository = repository;
+        }
         public Task<ProductResponse> DeleteProduct(int id)
         {
             throw new System.NotImplementedException();
@@ -21,27 +30,9 @@ namespace H3WebshopProeveprojekt.Api.Services
 
         public async Task<List<ProductResponse>> GetAllProducts()
         {
-            List<ProductResponse> productsResponse = new()
-            {
-                new()
-                {
-                    Id = 1,
-                    Name = "Ukrainer",
-                    Price = 700,
-                    DiscountPercentage = 0,
-                    Category = "shirt"
-                },
-                new()
-                {
-                    Id = 1,
-                    Name = "Ukrainer",
-                    Price = 700,
-                    DiscountPercentage = 0,
-                    Category = "shirt"
-                }
-            };
+            List<Product> products = await _repository.GetAllProducts();
 
-            return productsResponse;
+            return products.Select(product => MapProductToProductResponse(product)).ToList();
         }
 
         public Task<ProductResponse> GetProductById(int id)
@@ -57,6 +48,23 @@ namespace H3WebshopProeveprojekt.Api.Services
         public Task<ProductResponse> UpdateProduct(int id, ProductRequest productRequest)
         {
             throw new System.NotImplementedException();
+        }
+
+        private static ProductResponse MapProductToProductResponse(Product product)
+        {
+            return new ProductResponse
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                DiscountPercentage = product.DiscountPercentage,
+                CategoryId = product.CategoryId,
+                Category = new Category
+                {
+                    Id = product.Category.Id,
+                    CategoryName = product.Category.CategoryName
+                }
+            };
         }
     }
 }

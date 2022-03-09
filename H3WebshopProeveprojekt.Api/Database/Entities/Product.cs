@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace H3WebshopProeveprojekt.Api.Database.Entities
@@ -17,8 +18,10 @@ namespace H3WebshopProeveprojekt.Api.Database.Entities
         [Column(TypeName = "tinyint")]
         public int DiscountPercentage { get; set; }
 
-        [Column(TypeName = "nvarchar(30)")]
-        public string Category { get; set; }
+        [Column(TypeName = "smallint")]
+        public int CategoryId { get; set; }
 
+
+        public Category Category { get; set; }
     }
 }
