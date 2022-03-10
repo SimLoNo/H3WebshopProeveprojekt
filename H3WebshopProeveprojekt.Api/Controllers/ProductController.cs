@@ -41,5 +41,28 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetProductById([FromRoute] int id)
+        {
+            try
+            {
+                ProductResponse product = await _productService.GetProductById(id);
+                if (product == null)
+                {
+                    return NotFound();
+                }
+                return Ok(product);
+
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
     }
 }

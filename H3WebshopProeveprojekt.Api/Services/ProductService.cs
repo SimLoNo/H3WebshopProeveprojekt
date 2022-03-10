@@ -32,12 +32,23 @@ namespace H3WebshopProeveprojekt.Api.Services
         {
             List<Product> products = await _repository.GetAllProducts();
 
-            return products.Select(product => MapProductToProductResponse(product)).ToList();
+            if (products != null)
+            {
+                return products.Select(product => MapProductToProductResponse(product)).ToList();
+
+            }
+            return null;
         }
 
-        public Task<ProductResponse> GetProductById(int id)
+        public async Task<ProductResponse> GetProductById(int id)
         {
-            throw new System.NotImplementedException();
+            Product product = await _repository.GetProductById(id);
+            if (product != null)
+            {
+                return MapProductToProductResponse(product);
+
+            }
+            return null;
         }
 
         public Task<ProductResponse> InsertProduct(ProductRequest productRequest)

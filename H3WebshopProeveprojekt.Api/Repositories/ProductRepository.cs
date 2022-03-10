@@ -23,7 +23,7 @@ namespace H3WebshopProeveprojekt.Api.Repositories
             _context = context;
         }
 
-        public Task DeleteProductById(int productId)
+        public Task<Product> DeleteProductById(int productId)
         {
             throw new System.NotImplementedException();
         }
@@ -38,6 +38,7 @@ namespace H3WebshopProeveprojekt.Api.Repositories
         public async Task<Product> GetProductById(int productId)
         {
             return await _context.Product
+                .Include(p => p.Category)
                 .FirstOrDefaultAsync(product => product.Id == productId);
         }
 
