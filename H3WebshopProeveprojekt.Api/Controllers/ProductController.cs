@@ -1,4 +1,5 @@
-﻿using H3WebshopProeveprojekt.Api.DTO;
+﻿using H3WebshopProeveprojekt.Api.Database.Entities;
+using H3WebshopProeveprojekt.Api.DTO;
 using H3WebshopProeveprojekt.Api.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -64,5 +65,21 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+        /*[HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> InsertProduct([FromBody] Product product)
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }*/
     }
 }

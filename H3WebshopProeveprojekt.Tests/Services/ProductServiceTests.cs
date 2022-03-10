@@ -133,5 +133,64 @@ namespace H3WebshopProeveprojekt.Tests.Services
             Assert.IsType<ProductResponse>(result);
             Assert.Equal(id, result.Id);
         }
+
+        [Fact]
+        public async void InsertProduct_ShoulReturnProductResponse_WhenProductIsInserted()
+        {
+            //Arrange
+            int id = 1;
+            ProductRequest productRequest = new()
+            {
+
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+            };
+            Product product = new()
+            {
+                Id = id,
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+                Category = new()
+                {
+                    Id = id,
+                    CategoryName = "War criminal"
+                }
+            };
+            _mockProductRepository
+                .Setup(x => x.InsertProduct(It.IsAny<Product>()))
+                .ReturnsAsync(product);
+            //Act
+            var result = await _productService.InsertProduct(productRequest);
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ProductResponse>(result);
+            Assert.Equal(id,result.Id);
+        }
+
+        [Fact]
+        public async void InsertProduct_ShoulReturnNull_WhenNoProductIsInserted()
+        {
+            //Arrange
+            int id = 1;
+            ProductRequest productRequest = new()
+            {
+
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+            };
+            _mockProductRepository
+                .Setup(x => x.InsertProduct(It.IsAny<Product>()))
+                .ReturnsAsync(() => null);
+            //Act
+            var result = await _productService.InsertProduct(productRequest);
+            //Assert
+            Assert.Null(result);
+        }
     }
 }

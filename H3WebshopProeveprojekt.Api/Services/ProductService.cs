@@ -51,9 +51,15 @@ namespace H3WebshopProeveprojekt.Api.Services
             return null;
         }
 
-        public Task<ProductResponse> InsertProduct(ProductRequest productRequest)
+        public async Task<ProductResponse> InsertProduct(ProductRequest productRequest)
         {
-            throw new System.NotImplementedException();
+            Product product = MapProductRequestToProduct(productRequest);
+            Product insertedProduct = await _repository.InsertProduct(product);
+            if (insertedProduct != null)
+            {
+                return MapProductToProductResponse(insertedProduct);
+            }
+            return null;
         }
 
         public Task<ProductResponse> UpdateProduct(int id, ProductRequest productRequest)
@@ -75,6 +81,17 @@ namespace H3WebshopProeveprojekt.Api.Services
                     Id = product.Category.Id,
                     CategoryName = product.Category.CategoryName
                 }
+            };
+        }
+
+        private static Product MapProductRequestToProduct(ProductRequest productRequest)
+        {
+            return new Product
+            {
+                Name = productRequest.Name,
+                Price = productRequest.Price,
+                DiscountPercentage = productRequest.DiscountPercentage,
+                CategoryId = productRequest.CategoryId
             };
         }
     }

@@ -42,9 +42,11 @@ namespace H3WebshopProeveprojekt.Api.Repositories
                 .FirstOrDefaultAsync(product => product.Id == productId);
         }
 
-        public Task<Product> InsertProduct(Product product)
+        public async Task<Product> InsertProduct(Product product)
         {
-            throw new System.NotImplementedException();
+            _context.Product.Add(product);
+            await _context.SaveChangesAsync();
+            return product;
         }
 
         public Task<Product> UpdateProduct(int productId, Product product)

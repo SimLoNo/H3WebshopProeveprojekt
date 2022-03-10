@@ -67,6 +67,61 @@ namespace H3WebshopProeveprojekt.Tests.Repositories
             Assert.NotNull(result);
             Assert.IsType<List<Product>>(result);
             Assert.Equal(2, result.Count);
-        } 
+        }
+
+        [Fact]
+        public async void GetAllProducts_ShouldReturnEmptyListOfProducts_WhenNoProductsExists()
+        {
+            //Arrange
+            await _context.Database.EnsureDeletedAsync();
+            await _context.SaveChangesAsync();
+            //Act
+            var result = await _productRepository.GetAllProducts();
+            //Assert
+            Assert.NotNull(result);
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public async void GetProductById_ShouldReturnNull_WhenNoProductExists()
+        {
+            //Arrange
+            int id = 1;
+            await _context.Database.EnsureDeletedAsync();
+            await _context.SaveChangesAsync();
+            //Act
+            var result = await _productRepository.GetProductById(id);
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void GetProductById_ShouldReturnProduct_WhenProductExists()
+        {
+            //Arrange
+            int id = 1;
+            await _context.Database.EnsureDeletedAsync();
+            _context.Category.Add(
+            new()
+            {
+                Id = id,
+                CategoryName = "Trousers"
+            });
+            _context.Product.Add(new()
+            {
+                Id = id,
+                Name = "JeansA",
+                Price = 1234,
+                DiscountPercentage = 0,
+                CategoryId = id
+            });
+            await _context.SaveChangesAsync();
+            //Act
+            var result = await _productRepository.GetProductById(id);
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<Product>(result);
+            Assert.Equal(id, result.Id);
+        }
     }
 }
