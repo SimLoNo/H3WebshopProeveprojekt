@@ -123,5 +123,37 @@ namespace H3WebshopProeveprojekt.Tests.Repositories
             Assert.IsType<Product>(result);
             Assert.Equal(id, result.Id);
         }
+
+        [Fact]
+        public async void InsertProduct_ShouldReturnProductWithCategory_WhenProductIsInserted()
+        {
+            //Arrange
+            int id = 1;
+            await _context.Database.EnsureDeletedAsync();
+
+            _context.Category.Add(
+            new()
+            {
+                Id = id,
+                CategoryName = "Trousers"
+            });
+
+            await _context.SaveChangesAsync();
+
+            Product product = new()
+            {
+                Name = "JeansA",
+                Price = 1234,
+                DiscountPercentage = 0,
+                CategoryId = id
+            };
+            //Act
+            var result = await _productRepository.InsertProduct(product);
+            //Assert
+            Assert.NotNull(result);
+            Assert.NotNull(result.Category);
+            Assert.IsType<Product>(result);
+            Assert.Equal(id,result.Category.Id);
+        }
     }
 }

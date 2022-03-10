@@ -46,6 +46,8 @@ namespace H3WebshopProeveprojekt.Api.Repositories
         {
             _context.Product.Add(product);
             await _context.SaveChangesAsync();
+            int categoryId= product.CategoryId;
+            product.Category = await _context.Category.FirstOrDefaultAsync(category => category.Id == categoryId);
             return product;
         }
 

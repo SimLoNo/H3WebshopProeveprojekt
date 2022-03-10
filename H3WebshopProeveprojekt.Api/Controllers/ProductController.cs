@@ -65,21 +65,26 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
-        /*[HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status200OK)] //Should be 201Created, need to figure out how to implement that.
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> InsertProduct([FromBody] Product product)
+        public async Task<IActionResult> InsertProduct([FromBody] ProductRequest product)
         {
             try
             {
-
+                ProductResponse productResponse = await _productService.InsertProduct(product);
+                if (productResponse == null)
+                {
+                    return NoContent();
+                }
+                return Ok(productResponse);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return Problem(ex.Message);
             }
-        }*/
+        }
     }
 }
