@@ -51,9 +51,20 @@ namespace H3WebshopProeveprojekt.Api.Repositories
             return product;
         }
 
-        public Task<Product> UpdateProduct(int productId, Product product)
+        public async Task<Product> UpdateProduct(int productId, Product product)
         {
-            throw new System.NotImplementedException();
+            Product updateProduct = await _context.Product
+                .FirstOrDefaultAsync(p => p.Id == productId);
+            if (updateProduct != null)
+            {
+                updateProduct.Name = product.Name;
+                updateProduct.Price = product.Price;
+                updateProduct.DiscountPercentage = product.DiscountPercentage;
+                updateProduct.CategoryId = product.CategoryId;
+                await _context.SaveChangesAsync();
+                updateProduct.Category = product.Category;
+            }
+                return updateProduct;
         }
 
         public Task<Product> DeleteProduct(int productId)

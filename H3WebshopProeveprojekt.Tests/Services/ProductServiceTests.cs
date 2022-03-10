@@ -192,5 +192,26 @@ namespace H3WebshopProeveprojekt.Tests.Services
             //Assert
             Assert.Null(result);
         }
+        [Fact]
+        public async void UpdateProduct_ShouldReturnNull_WhenNoProductIsUpdated()
+        {
+            //Arrange
+            int id = 1;
+            ProductRequest productRequest = new()
+            {
+
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id
+            };
+            _mockProductRepository
+                .Setup(x => x.UpdateProduct(It.IsAny<int>(),It.IsAny<Product>()))
+                .ReturnsAsync(() => null);
+            //Act
+            var result = await _productService.InsertProduct(productRequest);
+            //Assert
+            Assert.Null(result);
+        }
     }
 }

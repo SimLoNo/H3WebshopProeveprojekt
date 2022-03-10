@@ -62,9 +62,15 @@ namespace H3WebshopProeveprojekt.Api.Services
             return null;
         }
 
-        public Task<ProductResponse> UpdateProduct(int id, ProductRequest productRequest)
+        public async Task<ProductResponse> UpdateProduct(int id, ProductRequest productRequest)
         {
-            throw new System.NotImplementedException();
+            Product product = MapProductRequestToProduct(productRequest);
+            Product updatedProduct = await _repository.UpdateProduct(id, product);
+            if (updatedProduct != null)
+            {
+                return MapProductToProductResponse(updatedProduct);
+            }
+            return null;
         }
 
         private static ProductResponse MapProductToProductResponse(Product product)

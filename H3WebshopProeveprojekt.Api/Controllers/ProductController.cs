@@ -86,5 +86,27 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpPut("{productId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)] //Should be 201Created, need to figure out how to implement that.
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UpdateProduct([FromRoute] int productId, [FromBody] ProductRequest product)
+        {
+            try
+            {
+                ProductResponse productResponse = await _productService.UpdateProduct(productId, product);
+                if (productResponse == null)
+                {
+                    return NoContent();
+                }
+                return Ok(productResponse);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
     }
 }
