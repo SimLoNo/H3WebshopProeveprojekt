@@ -155,5 +155,52 @@ namespace H3WebshopProeveprojekt.Tests.Repositories
             Assert.IsType<Product>(result);
             Assert.Equal(id,result.Category.Id);
         }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnNull_WhenTheProductDoesNotExist()
+        {
+            //Arrange
+            await _context.Database.EnsureDeletedAsync();
+            await _context.SaveChangesAsync();
+
+            int id = 1;
+
+
+            //Act
+            var result = await _productRepository.DeleteProduct(id);
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnProduct_WhenTheProductIsExist()
+        {
+            //Arrange
+            int id = 1;
+            await _context.Database.EnsureDeletedAsync();
+            _context.Product.Add(new()
+            {
+                Id = id,
+                Name = "War crime",
+                Price = 10.10f,
+                DiscountPercentage = 0,
+                CategoryId = id
+            });
+            _context.Category.Add(new()
+            {
+                Id = id,
+                CategoryName = "Putin"
+            });
+            await _context.SaveChangesAsync();
+
+
+
+            //Act
+            var result = await _productRepository.DeleteProduct(id);
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<Product>(result);
+            Assert.Equal(id, result.Id);
+        }
     }
 }

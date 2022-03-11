@@ -108,5 +108,27 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [HttpDelete("{productId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)] //Should be 201Created, need to figure out how to implement that.
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
+        {
+            try
+            {
+                ProductResponse productResponse = await _productService.DeleteProduct(productId);
+                if (productResponse == null)
+                {
+                    return NotFound();
+                }
+                return Ok(productResponse);
+            }
+            catch (Exception ex)
+            {
+
+                return Problem(ex.Message);
+            }
+        }
     }
 }

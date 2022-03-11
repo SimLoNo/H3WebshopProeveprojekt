@@ -209,7 +209,89 @@ namespace H3WebshopProeveprojekt.Tests.Services
                 .Setup(x => x.UpdateProduct(It.IsAny<int>(),It.IsAny<Product>()))
                 .ReturnsAsync(() => null);
             //Act
-            var result = await _productService.InsertProduct(productRequest);
+            var result = await _productService.UpdateProduct(id,productRequest);
+            //Assert
+            Assert.Null(result);
+        }
+
+        [Fact]
+        public async void UpdateProduct_ShouldReturnProductResponse_WhenProductIsUpdated()
+        {
+            //Arrange
+            int id = 1;
+            ProductRequest productRequest = new()
+            {
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id
+            };
+
+            Product product = new()
+            {
+                Id = id,
+                Name = "Skin of Putin",
+                Price = 10.00f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+                Category = new()
+                {
+                    Id = id,
+                    CategoryName = "War criminal"
+                }
+            };
+
+            _mockProductRepository
+                .Setup(x => x.UpdateProduct(It.IsAny<int>(), It.IsAny<Product>()))
+                .ReturnsAsync(product);
+            //Act
+            var result = await _productService.UpdateProduct(id,productRequest);
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ProductResponse>(result);
+            Assert.Equal(id, result.Id);
+        }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnProductResponse_WhenProductIsDeleted()
+        {
+            //Arrange
+            int id = 1;
+            Product product = new()
+            {
+                Id = id,
+                Name = "War crime",
+                Price = 10.10f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+                Category = new()
+                {
+                    Id = id,
+                    CategoryName= "Putin"
+                }
+            };
+            _mockProductRepository
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(product);
+            //Act
+            var result = await _productService.DeleteProduct(id);
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<ProductResponse>(result);
+            Assert.Equal(id,result.Id);
+        }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnNull_WhenNoProductIsDeleted()
+        {
+            //Arrange
+            int id = 1;
+
+            _mockProductRepository
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(() => null);
+            //Act
+            var result = await _productService.DeleteProduct(id);
             //Assert
             Assert.Null(result);
         }

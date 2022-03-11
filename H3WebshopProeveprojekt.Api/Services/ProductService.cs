@@ -23,9 +23,14 @@ namespace H3WebshopProeveprojekt.Api.Services
         {
             _repository = repository;
         }
-        public Task<ProductResponse> DeleteProduct(int id)
+        public async Task<ProductResponse> DeleteProduct(int id)
         {
-            throw new System.NotImplementedException();
+            Product product = await _repository.DeleteProduct(id);
+            if (product != null)
+            {
+                return MapProductToProductResponse(product);
+            }
+            return null;
         }
 
         public async Task<List<ProductResponse>> GetAllProducts()

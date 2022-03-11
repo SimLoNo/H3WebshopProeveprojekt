@@ -159,5 +159,64 @@ namespace H3WebshopProeveprojekt.Tests.Controllers
 
         }
 
+        [Fact]
+        public async void DeleteProduct_ShouldReturnStatusCode200_WhenTheProductIsDeleted()
+        {
+            //Arrange
+            int id = 1;
+            ProductResponse product = new()
+            {
+                Id = id,
+                Name = "War crime",
+                Price = 10.10f,
+                DiscountPercentage = 0,
+                CategoryId = id,
+                Category = new()
+                {
+                    Id = id,
+                    CategoryName = "Putin"
+                }
+            };
+
+            _mockproductService
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(product);
+            //Act
+            var result = await _productController.DeleteProduct(id);
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(200, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnStatusCode404_WhenNoProductIsDeleted()
+        {
+            //Arrange
+            int id = 1;
+            _mockproductService
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(() => null);
+            //Act
+            var result = await _productController.DeleteProduct(id);
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(404, statusCodeResult.StatusCode);
+        }
+
+        [Fact]
+        public async void DeleteProduct_ShouldReturnStatusCode500_WhenExceptionIsRaised()
+        {
+            //Arrange
+            int id = 1;
+            _mockproductService
+                .Setup(x => x.DeleteProduct(It.IsAny<int>()))
+                .ReturnsAsync(() => throw new Exception("This is Putins invasion of Ukraine."));
+            //Act
+            var result = await _productController.DeleteProduct(id);
+            //Assert
+            var statusCodeResult = (IStatusCodeActionResult)result;
+            Assert.Equal(500, statusCodeResult.StatusCode);
+        }
+
     }
 }
