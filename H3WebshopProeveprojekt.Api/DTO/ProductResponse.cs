@@ -13,6 +13,12 @@ namespace H3WebshopProeveprojekt.Api.DTO
 
         public int CategoryId { get; set; }
 
-        public Category Category { get; set; }
+        public ProductCategoryResponse Category { get; set; }
+    }
+
+    public class ProductCategoryResponse
+    {
+        public int Id { get; set; }
+        public string CategoryName { get; set; }
     }
 }
