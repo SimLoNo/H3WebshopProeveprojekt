@@ -38,19 +38,36 @@ namespace H3WebshopProeveprojekt.Api.Services
             return null;
         }
 
-        public Task<CategoryResponse> GetCategoryById(int id)
+        public async Task<CategoryResponse> GetCategoryById(int id)
         {
-            throw new System.NotImplementedException();
+            Category category = await _repository.GetCategoryById(id);
+            if (category != null)
+            {
+                return MapCategoryToCategoryResponse(category);
+            }
+            return null;
         }
 
-        public Task<CategoryResponse> InsertNewCategory(CategoryRequest category)
+        public async Task<CategoryResponse> InsertNewCategory(CategoryRequest category)
         {
-            throw new System.NotImplementedException();
+            Category newCategory = MapCategoryRequestToCategory(category);
+            Category insertedCategory = await _repository.InsertNewCategory(newCategory);
+            if (insertedCategory != null)
+            {
+                return MapCategoryToCategoryResponse(insertedCategory);
+            }
+            return null;
         }
 
-        public Task<CategoryResponse> UpdateNewCategory(int id, CategoryRequest category)
+        public async Task<CategoryResponse> UpdateNewCategory(int id, CategoryRequest category)
         {
-            throw new System.NotImplementedException();
+            Category updateCategory = MapCategoryRequestToCategory(category);
+            Category newCategory = await _repository.UpdateCategory(id, updateCategory);
+            if (newCategory != null)
+            {
+                return MapCategoryToCategoryResponse(newCategory);
+            }
+            return null;
         }
 
         private static CategoryResponse MapCategoryToCategoryResponse(Category category)
@@ -71,11 +88,10 @@ namespace H3WebshopProeveprojekt.Api.Services
             };
         }
 
-        private static Category MapCategoryRequestToCategory(Category category)
+        private static Category MapCategoryRequestToCategory(CategoryRequest category)
         {
             return new Category
             {
-                Id = category.Id,
                 CategoryName = category.CategoryName,
             };
         }
