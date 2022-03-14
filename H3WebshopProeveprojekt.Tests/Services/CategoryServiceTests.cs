@@ -21,5 +21,48 @@ namespace H3WebshopProeveprojekt.Tests.Services
         {
             _categoryService = new(_mockCategoryRepository.Object);
         }
+
+        [Fact]
+        public async void GetAllCategories_ShouldReturnListOfCategorieResponse_WhenCategoriesExists()
+        {
+            //Arrange
+            List<Category> categories = new();
+            categories.Add(new()
+            {
+                Id = 1,
+                CategoryName = "War Criminal"
+            });
+            categories.Add(new()
+            {
+                Id = 2,
+                CategoryName = "Almost every other nation than Russia"
+            });
+
+            _mockCategoryRepository
+                .Setup(x => x.GetAllCategories())
+                .ReturnsAsync(categories);
+            //Act
+            var result = await _categoryService.GetAllCategories();
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<List<CategoryResponse>>(result);
+            Assert.Equal(2, result.Count);
+        }
+
+        [Fact]
+        public async void GetAllCategories_ShouldReturnEmptyListOfCategoryResponse_WhenNoCategoriesExists()
+        {
+            //Arrange
+            List<Category> categories = new();
+            _mockCategoryRepository
+                .Setup(x => x.GetAllCategories())
+                .ReturnsAsync(categories);
+            //Act
+            var result = await _categoryService.GetAllCategories();
+            //Assert
+            Assert.NotNull(result);
+            Assert.IsType<List<Category>>(result);
+            Assert.Empty(result);
+        }
     }
 }
