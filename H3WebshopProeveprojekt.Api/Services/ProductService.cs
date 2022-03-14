@@ -87,7 +87,7 @@ namespace H3WebshopProeveprojekt.Api.Services
                 Price = product.Price,
                 DiscountPercentage = product.DiscountPercentage,
                 CategoryId = product.CategoryId,
-                Category = new Category
+                Category = new()
                 {
                     Id = product.Category.Id,
                     CategoryName = product.Category.CategoryName
