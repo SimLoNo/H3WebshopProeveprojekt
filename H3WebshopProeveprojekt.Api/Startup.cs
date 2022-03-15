@@ -1,7 +1,11 @@
+using H3WebshopProeveprojekt.Api.Database;
+using H3WebshopProeveprojekt.Api.Repositories;
+using H3WebshopProeveprojekt.Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +30,15 @@ namespace H3WebshopProeveprojekt.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+            services.AddDbContext<H3WebshopProeveprojektContext>(
+                x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
