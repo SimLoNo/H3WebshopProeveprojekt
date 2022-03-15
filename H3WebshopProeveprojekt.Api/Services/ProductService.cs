@@ -36,11 +36,9 @@ namespace H3WebshopProeveprojekt.Api.Services
         public async Task<List<ProductResponse>> GetAllProducts()
         {
             List<Product> products = await _repository.GetAllProducts();
-
             if (products != null)
             {
                 return products.Select(product => MapProductToProductResponse(product)).ToList();
-
             }
             return null;
         }

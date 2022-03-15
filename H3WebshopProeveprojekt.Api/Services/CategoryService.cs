@@ -12,7 +12,7 @@ namespace H3WebshopProeveprojekt.Api.Services
         public Task<List<CategoryResponse>> GetAllCategories();
         public Task<CategoryResponse> GetCategoryById(int id);
         public Task<CategoryResponse> InsertNewCategory(CategoryRequest category);
-        public Task<CategoryResponse> UpdateNewCategory(int id, CategoryRequest category);
+        public Task<CategoryResponse> UpdateCategory(int id, CategoryRequest category);
         public Task<CategoryResponse> DeleteCategory(int id);
     }
     public class CategoryService : ICategoryService
@@ -64,7 +64,7 @@ namespace H3WebshopProeveprojekt.Api.Services
             return null;
         }
 
-        public async Task<CategoryResponse> UpdateNewCategory(int id, CategoryRequest category)
+        public async Task<CategoryResponse> UpdateCategory(int id, CategoryRequest category)
         {
             Category updateCategory = MapCategoryRequestToCategory(category);
             Category newCategory = await _repository.UpdateCategory(id, updateCategory);
@@ -83,7 +83,7 @@ namespace H3WebshopProeveprojekt.Api.Services
                 CategoryName = category.CategoryName,
                 Products = category.Products.Select(product => new CategoryProductResponse
                 {
-                    Id = category.Id,
+                    Id = product.Id,
                     Name = product.Name,
                     Price = product.Price,
                     DiscountPercentage = product.DiscountPercentage,
