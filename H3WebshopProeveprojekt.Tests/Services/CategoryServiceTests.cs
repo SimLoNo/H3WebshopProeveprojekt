@@ -234,7 +234,7 @@ namespace H3WebshopProeveprojekt.Tests.Services
             int id = 1;
             CategoryRequest categoryRequest = new()
             {
-                CategoryName = "Caris and Merthing should get married"
+                CategoryName = "Caris and Merthin should get married"
             };
 
             _mockCategoryRepository
