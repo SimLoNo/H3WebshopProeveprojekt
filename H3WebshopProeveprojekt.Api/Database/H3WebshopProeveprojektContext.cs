@@ -14,7 +14,8 @@ namespace H3WebshopProeveprojekt.Api.Database
 
         public DbSet<Product> Product { get; set; }
         public DbSet<Category> Category { get; set; }
-
+        public DbSet<Account> Account { get; set; }
+        public DbSet<AccountRole> AccountRole { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Category>().HasData(
