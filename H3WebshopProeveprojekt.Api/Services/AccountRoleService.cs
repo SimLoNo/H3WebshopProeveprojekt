@@ -1,6 +1,8 @@
 ﻿using H3WebshopProeveprojekt.Api.Database.Entities;
 using H3WebshopProeveprojekt.Api.DTO;
+using H3WebshopProeveprojekt.Api.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace H3WebshopProeveprojekt.Api.Services
@@ -15,29 +17,61 @@ namespace H3WebshopProeveprojekt.Api.Services
     }
     public class AccountRoleService : IAccountRoleService
     {
-        public Task<AccountRoleResponse> DeleteAccountRole(int id)
+        private readonly IAccountRoleRepository _accountRoleRepository;
+        public AccountRoleService(IAccountRoleRepository accountRoleRepository)
         {
-            throw new System.NotImplementedException();
+            _accountRoleRepository = accountRoleRepository;
+        }
+        public async Task<AccountRoleResponse> DeleteAccountRole(int id)
+        {
+            AccountRole deletedAccount = await _accountRoleRepository.DeleteAccountRole(id);
+            if (deletedAccount != null)
+            {
+                return MapAccountRoleToAccountRoleResponse(deletedAccount);
+            }
+            return null;
         }
 
-        public Task<AccountRoleResponse> GetAccountRoleByID(int id)
+        public async Task<AccountRoleResponse> GetAccountRoleByID(int id)
         {
-            throw new System.NotImplementedException();
+            AccountRole accountRole = await _accountRoleRepository.GetAccountRoleById(id);
+            if (accountRole != null)
+            {
+                return MapAccountRoleToAccountRoleResponse(accountRole);
+            }
+            return null;
         }
 
-        public Task<List<AccountRoleResponse>> GetAllAccountRoles()
+        public async Task<List<AccountRoleResponse>> GetAllAccountRoles()
         {
-            throw new System.NotImplementedException();
+            List<AccountRole> accountRoles = await _accountRoleRepository.GetAllAccountRoles();
+            if (accountRoles != null)
+            {
+                return accountRoles.Select(accountRole => MapAccountRoleToAccountRoleResponse(accountRole)).ToList();
+            }
+            return null;
         }
 
-        public Task<AccountRoleResponse> InsertNewAccountRole(AccountRoleRequest accountRoleRequest)
+        public async Task<AccountRoleResponse> InsertNewAccountRole(AccountRoleRequest accountRoleRequest)
         {
-            throw new System.NotImplementedException();
+            AccountRole accountRole = MapAccountRoleRequestToAccountRole(accountRoleRequest);
+            AccountRole insertedAccountRole = await _accountRoleRepository.InsertNewAccountRole(accountRole);
+            if (insertedAccountRole != null)
+            {
+                return MapAccountRoleToAccountRoleResponse(insertedAccountRole);
+            }
+            return null;
         }
 
-        public Task<AccountRoleResponse> UpdateAccountRole(int id, AccountRoleRequest accountRoleRequest)
+        public async Task<AccountRoleResponse> UpdateAccountRole(int id, AccountRoleRequest accountRoleRequest)
         {
-            throw new System.NotImplementedException();
+            AccountRole accountRole = MapAccountRoleRequestToAccountRole(accountRoleRequest);
+            AccountRole updatedAccountRole = await _accountRoleRepository.UpdateAccountRole(id, accountRole);
+            if (updatedAccountRole != null)
+            {
+                return MapAccountRoleToAccountRoleResponse(updatedAccountRole);
+            }
+            return null;
         }
 
         private static AccountRoleResponse MapAccountRoleToAccountRoleResponse(AccountRole accountRole)
