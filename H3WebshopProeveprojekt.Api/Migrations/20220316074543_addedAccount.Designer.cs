@@ -3,14 +3,16 @@ using H3WebshopProeveprojekt.Api.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace H3WebshopProeveprojekt.Api.Migrations
 {
     [DbContext(typeof(H3WebshopProeveprojektContext))]
-    partial class H3WebshopProeveprojektContextModelSnapshot : ModelSnapshot
+    [Migration("20220316074543_addedAccount")]
+    partial class addedAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,18 +75,6 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Category");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryName = "Trousers"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryName = "Shirts"
-                        });
                 });
 
             modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.Product", b =>
@@ -111,40 +101,6 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Product");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            DiscountPercentage = (byte)0,
-                            Name = "Jeans",
-                            Price = 400.0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 1,
-                            DiscountPercentage = (byte)0,
-                            Name = "Woolies",
-                            Price = 300.0
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 2,
-                            DiscountPercentage = (byte)0,
-                            Name = "Serena shirt",
-                            Price = 600.0
-                        },
-                        new
-                        {
-                            Id = 4,
-                            CategoryId = 2,
-                            DiscountPercentage = (byte)0,
-                            Name = "Tshirt",
-                            Price = 200.0
-                        });
                 });
 
             modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.Product", b =>
