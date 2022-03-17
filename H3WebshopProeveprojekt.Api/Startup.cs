@@ -41,6 +41,8 @@ namespace H3WebshopProeveprojekt.Api
             services.AddScoped<IAccountRoleRepository, AccountRoleRepository>();
 
             services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddScoped<IAccountService, AccountService>();
+
 
 
 
