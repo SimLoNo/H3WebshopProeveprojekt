@@ -19,5 +19,9 @@ namespace H3WebshopProeveprojekt.Api.Database.Entities
         [Column(TypeName = "int")]
         public int AccountRoleId { get; set; }
 
+
+        public AccountRole AccountRole { get; set; }
     }
+
+    
 }

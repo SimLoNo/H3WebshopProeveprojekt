@@ -40,6 +40,9 @@ namespace H3WebshopProeveprojekt.Api
             services.AddScoped<IAccountRoleService, AccountRoleService>();
             services.AddScoped<IAccountRoleRepository, AccountRoleRepository>();
 
+            services.AddScoped<IAccountRepository, AccountRepository>();
+
+
 
             services.AddDbContext<H3WebshopProeveprojektContext>(
                 x => x.UseSqlServer(Configuration.GetConnectionString("Default")));
