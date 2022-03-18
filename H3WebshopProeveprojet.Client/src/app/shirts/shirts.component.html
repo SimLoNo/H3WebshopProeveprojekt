@@ -1,5 +1,23 @@
 <p>shirts works!</p>
 
+<div>
+    <label>Name</label>
+    <input [(ngModel)]="product.name">
+</div>
+<div>
+    <label>Price</label>
+    <input [(ngModel)]="product.price">
+</div>
+<div>
+    <label>Discount percentage</label>
+    <input [(ngModel)]="product.discountPercentage">
+</div>
+<select [(ngModel)]="product.categoryId">
+    <option [value]="0">Select</option>
+    <option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</option>
+</select>
 <div *ngFor="let product of products">
-    <h2>{{ product.name }}, {{ product.price }}</h2>
+    <button (click)="edit(product)">Edit</button>
+    <button (click)="delete(product)">Delete</button>
+    <p>{{ product.name }}, {{ product.price }}</p>
 </div>

@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../_models/category';
 import { Product } from '../_models/product';
+import { CategoryService } from '../_services/category.service';
 import { ProductService } from '../_services/product.service';
 
 @Component({
@@ -10,15 +12,30 @@ import { ProductService } from '../_services/product.service';
 })
 export class ShirtsComponent implements OnInit {
 
-  constructor(private ProductService:ProductService) { }
+  products: Product[] = [];
+  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0 };
+  categories: Category[] = [];
 
-  products: Product[] = []
+  constructor(private ProductService: ProductService, private CategoryService: CategoryService) { }
 
   ngOnInit(): void {
-    //this.products.push({id:1,name:"Kingsbridge Scarlet",price:10,discountPrice:0,categoryId:1})
-    //this.products.push({id:1,name:"Pallageto",price:200,discountPrice:0,categoryId:2})
     this.ProductService.GetAllProducts()
-    .subscribe(x => this.products = x);
+      .subscribe(x => this.products = x);
+
+    this.CategoryService.getAllCategories()
+    .subscribe(x => this.categories = x);
+    
+  }
+
+  edit(product: Product): void {
+    this.product = product;
+    console.log(`The product categoryId is: ${product.categoryId}`)
+  }
+
+  delete(product: Product): void {
+    if(confirm('Are you sure you want to delete this product?')){
+      //Delete the product.
+    }
   }
 
 }
