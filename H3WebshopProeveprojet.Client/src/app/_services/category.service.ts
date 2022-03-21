@@ -21,4 +21,9 @@ export class CategoryService {
     return this.Http.get<Category[]>(
       this.apiUrl);
   }
+
+  getCategoryById(categoryId:Number):Observable<Category>{
+    return this.Http.get<Category>(
+      `${this.apiUrl}/${categoryId}`);
+  }
 }

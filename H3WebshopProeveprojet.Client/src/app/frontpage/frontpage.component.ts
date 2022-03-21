@@ -8,10 +8,13 @@ import { ProductService } from '../_services/product.service';
 })
 export class FrontpageComponent implements OnInit {
 
-  constructor() { }
-
-  products:Product[] = []
+  constructor(private productService:ProductService) { }
+  products: Product[] = [];
+  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0 };
+ 
   ngOnInit(): void {
+    this.productService.GetAllProducts()
+    .subscribe(x => this.products = x);
   }
 
 }
