@@ -13,7 +13,7 @@ import { ProductService } from '../_services/product.service';
 export class ShirtsComponent implements OnInit {
 
   products: Product[] = [];
-  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0 };
+  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0,productImage:'' };
   categories: Category[] = [];
 
   constructor(private ProductService: ProductService, private CategoryService: CategoryService) { }

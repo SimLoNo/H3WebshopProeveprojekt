@@ -85,6 +85,7 @@ namespace H3WebshopProeveprojekt.Api.Services
                 Price = product.Price,
                 DiscountPercentage = product.DiscountPercentage,
                 CategoryId = product.CategoryId,
+                ProductImage = product.ProductImage,
                 Category = new()
                 {
                     Id = product.Category.Id,
@@ -100,7 +101,8 @@ namespace H3WebshopProeveprojekt.Api.Services
                 Name = productRequest.Name,
                 Price = productRequest.Price,
                 DiscountPercentage = productRequest.DiscountPercentage,
-                CategoryId = productRequest.CategoryId
+                CategoryId = productRequest.CategoryId,
+                ProductImage = productRequest.ProductImage
             };
         }
     }

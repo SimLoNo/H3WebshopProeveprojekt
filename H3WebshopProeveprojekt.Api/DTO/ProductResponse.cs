@@ -12,6 +12,7 @@ namespace H3WebshopProeveprojekt.Api.DTO
         public int DiscountPercentage { get; set; }
 
         public int CategoryId { get; set; }
+        public string ProductImage { get; set; }
 
         public ProductCategoryResponse Category { get; set; }
     }

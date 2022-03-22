@@ -1,6 +1,8 @@
-<div id="product" *ngFor="let product of products">
+<div>
     <a routerLink="/product/{{product.id}}">
         <img class="img" src='../../assets/{{product.productImage}}.png' alt="" onerror="this.src='../../assets/unknownItem.png';" > <!--   ../../assets/{{product.productImage}}.png -->
     </a>
-    <p>{{product.name}}, {{product.price}} -dkk</p>
+</div>
+<div>
+    {{product.name}}, {{product.price}}
 </div>

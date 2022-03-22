@@ -10,6 +10,7 @@ import { ProductComponent } from './admin/product/product.component';
 import { FormsModule } from '@angular/forms';
 import { ProductPagesComponent } from './product-pages/product-pages.component';
 import { CategoryComponent } from './admin/category/category.component';
+import { ProductPageComponent } from './product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { CategoryComponent } from './admin/category/category.component';
     FrontpageComponent,
     ProductComponent,
     ProductPagesComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductPageComponent
   ],
   imports: [
     BrowserModule,

@@ -10,10 +10,17 @@
     <label>Discount percentage</label>
     <input [(ngModel)]="product.discountPercentage">
 </div>
+<div>
+    <label>Product Image</label>
+    <input [(ngModel)]="product.productImage">
+</div>
 <select [(ngModel)]="product.categoryId">
     <option [value]="0">Select</option>
     <option *ngFor="let category of categories" [value]="category.id">{{category.categoryName}}</option>
 </select>
+<div>
+    <img src="../../assets/{{product.productImage}}.png" onerror="this.src='../../assets/unknownItem.png';">
+</div>
 <button (click)="save()">Save</button>
 <button (click)="cancel()">Cancel</button>
 <span *ngIf="message != ''">{{ message }}</span>
