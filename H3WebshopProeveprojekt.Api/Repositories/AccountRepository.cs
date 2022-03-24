@@ -52,6 +52,7 @@ namespace H3WebshopProeveprojekt.Api.Repositories
         {
             _context.Account.Add(account);
             await _context.SaveChangesAsync();
+            account.AccountRole = await _context.AccountRole.FirstOrDefaultAsync(x => x.Id == account.AccountRoleId);
             return account;
         }
 
