@@ -1,6 +1,6 @@
 ﻿using H3WebshopProeveprojekt.Api.Database.Entities;
 
-namespace H3WebshopProeveprojekt.Api.Jwt
+namespace H3WebshopProeveprojekt.Api.JwtToken
 {
     public interface IJwtAuthenticationManager
     {

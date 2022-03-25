@@ -1,4 +1,4 @@
-﻿namespace H3WebshopProeveprojekt.Api.Jwt
+﻿namespace H3WebshopProeveprojekt.Api.JwtToken
 {
     public class JwtAuthenticationRepository
     {

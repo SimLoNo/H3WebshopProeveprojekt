@@ -12,7 +12,7 @@ namespace H3WebshopProeveprojekt.Api.Services
 {
     public interface IJwtAuthenticationService
     {
-        Task<string> Authenticate(AccountRequest accountRequest);
+        Task<DTO.JwtToken> Authenticate(AccountRequest accountRequest);
     }
     public class JwtAuthenticationService : IJwtAuthenticationService
     {
@@ -22,10 +22,10 @@ namespace H3WebshopProeveprojekt.Api.Services
         public JwtAuthenticationService(IJwtAuthenticationRepository jwtAuthenticationRepository)
         {
             _jwtAuthenticationRepository = jwtAuthenticationRepository;
-            _key = "Brianna for house wife!";
+            _key = "ijurkbflhmklqacwqzdxmkkhvqowlyqa";
         }
 
-        public async Task<string> Authenticate(AccountRequest accountRequest)
+        public async Task<DTO.JwtToken> Authenticate(AccountRequest accountRequest)
         {
             Account requestedAccount = MapAccountRequestToAccount(accountRequest);
             Account foundAccount = await _jwtAuthenticationRepository.Authenticate(requestedAccount);
@@ -46,7 +46,7 @@ namespace H3WebshopProeveprojekt.Api.Services
                 SecurityAlgorithms.HmacSha256)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return tokenHandler.WriteToken(token);
+            return new DTO.JwtToken() { Token = tokenHandler.WriteToken(token) };
         }
 
         private static Account MapAccountRequestToAccount(AccountRequest accountRequest)

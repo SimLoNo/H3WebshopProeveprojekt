@@ -27,7 +27,7 @@ namespace H3WebshopProeveprojekt.Api.Controllers
         {
             try
             {
-                string jwtToken = await _jwtAuthenticationService.Authenticate(account);
+                DTO.JwtToken jwtToken = await _jwtAuthenticationService.Authenticate(account);
                 if (jwtToken != null)
                 {
                     return Ok(jwtToken);
