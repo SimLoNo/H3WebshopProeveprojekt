@@ -3,6 +3,7 @@ import { Category } from '../_models/category';
 import { Product } from '../_models/product';
 import { CategoryService } from '../_services/category.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { CartService } from '../_services/cart.service';
 
 @Component({
   selector: 'app-product-pages',
@@ -11,7 +12,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class ProductPagesComponent implements OnInit {
 
-  constructor(private categoryService:CategoryService, private route:ActivatedRoute) { }
+  constructor(private categoryService:CategoryService, private route:ActivatedRoute, private cartService:CartService) { }
   category: Category = { id: 0, categoryName: '', products: [] };
   categoryId:Number = 0;
  
@@ -22,7 +23,10 @@ export class ProductPagesComponent implements OnInit {
       this.categoryService.getCategoryById(this.categoryId)
     .subscribe(x => this.category = x);
     })
-    
+  }
+
+  addProductToBasket(product:Product):void{
+    this.cartService.addToCart(1,product);
   }
 
 

@@ -1,13 +1,15 @@
 #product{
     box-sizing: border-box;
     width: 20%;
+    height: 50vh;
     float:left;
     text-align: center;
     margin-top: 1%;
     .img{
+        max-width: 80%;
         background-image:image('../../assets/unknownItem.png');
-        width: 80%;
-        height: auto;
+        max-height: 80%;
     
     }
 }
+
