@@ -4,6 +4,8 @@ import { Product } from '../_models/product';
 import { CategoryService } from '../_services/category.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { CartService } from '../_services/cart.service';
+import { Output, EventEmitter } from '@angular/core';
+import { ShoppingCartItem } from '../_models/shoppingCartItem';
 
 @Component({
   selector: 'app-product-pages',
@@ -12,21 +14,30 @@ import { CartService } from '../_services/cart.service';
 })
 export class ProductPagesComponent implements OnInit {
 
-  constructor(private categoryService:CategoryService, private route:ActivatedRoute, private cartService:CartService) { }
+  constructor(private categoryService: CategoryService, private route: ActivatedRoute, private cartService: CartService) { }
   category: Category = { id: 0, categoryName: '', products: [] };
-  categoryId:Number = 0;
- 
+  categoryId: Number = 0;
+  @Output() newCartEvent = new EventEmitter<ShoppingCartItem>();
+
   ngOnInit(): void {
     this.route.paramMap
-    .subscribe(params => {
-      this.categoryId = Number(params.get('id'));
-      this.categoryService.getCategoryById(this.categoryId)
-    .subscribe(x => this.category = x);
-    })
+      .subscribe(params => {
+        this.categoryId = Number(params.get('id'));
+        if (this.categoryId != 0) {
+          this.categoryService.getCategoryById(this.categoryId)
+            .subscribe(x => this.category = x);
+        }
+      })
   }
 
-  addProductToBasket(product:Product):void{
-    this.cartService.addToCart(1,product);
+  addProductToCart(product: Product): void {
+    let cartItem:ShoppingCartItem = {
+      amount:1,
+      item:product};
+    console.log(`addProductToCart is running, newCartEvent should fire. Product: ${product.name}, shoppingCartItem: ${cartItem.amount}.`);
+    //this.cartService.addToCart(cartItem);
+    this.newCartEvent.emit(cartItem);
+    console.log("addProductToCart is running, newCartEvent is fired.");
   }
 
 

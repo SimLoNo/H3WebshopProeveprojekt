@@ -22,23 +22,23 @@ export class CartService {
     localStorage.setItem(this.cartName, JSON.stringify(this.cart));
   }
 
-  addToCart(amount: number, item: Product): ShoppingCartItem[] {
+  addToCart(newItem:ShoppingCartItem): ShoppingCartItem[] {
     this.getCart();
 
     let productFound = false;
 
     this.cart.forEach(cartItem => {
-      if (cartItem.item.id == item.id) {
-        cartItem.amount += amount;
+      if (cartItem.item.id == newItem.item.id) {
+        cartItem.amount += newItem.amount;
         productFound = true;
 
         if (cartItem.amount <= 0) {
-          this.removeItemFromCart(item.id);
+          this.removeItemFromCart(newItem.item.id);
         }
       }
     })
     if (!productFound) {
-      this.cart.push({ amount, item });
+      this.cart.push(newItem);
     }
     this.saveCart();
     return this.cart;
