@@ -19,9 +19,16 @@
           <img src="../../assets/shoppingCart.png" id="cartIcon" alt="">
         </button>
         <div class="dropdown-content">
-          <div *ngFor="let product of shoppingCart" id="cartItem">
-            <img src='../../assets/{{product.item.productImage}}.png' alt="">
-            {{product.amount}}, {{product.item.name}} - {{product.item.price * product.amount}}
+          <div *ngFor="let product of shoppingCart" >
+            <div class="flex-container" >
+              <div id="cartItem">
+                <img src='../../assets/{{product.item.productImage}}.png' alt="">
+              </div>
+              <div id="cartItem">
+                <p>{{product.amount}}, {{product.item.name}}</p>
+                 <p>- {{product.item.price * product.amount}} dkk</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

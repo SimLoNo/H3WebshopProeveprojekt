@@ -1,13 +1,16 @@
-<div>
-    <a routerLink="/product/{{product.id}}">
+<div class="flex-container">
+    <div class="imageDiv">
         <img class="img" src='../../assets/{{product.productImage}}.png' alt="" onerror="this.src='../../assets/unknownItem.png';" > <!--   ../../assets/{{product.productImage}}.png -->
-    </a>
-</div>
+    </div>
 <div>
-    {{product.name}}, {{product.price}}
+    <h1>{{product.name}}</h1>
+    <p>
+        {{product.price}}
+    </p>
     <div>
         <label>Amount</label>
         <input [(ngModel)]="amount" type="number">
         <button (click)="addProductToCart(product)">add</button>
     </div>
+</div>
 </div>

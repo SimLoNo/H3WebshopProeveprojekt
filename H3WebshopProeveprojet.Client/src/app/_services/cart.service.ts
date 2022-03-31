@@ -1,5 +1,4 @@
-import { isNgTemplate } from '@angular/compiler';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Product } from '../_models/product';
 import { ShoppingCartItem } from '../_models/shoppingCartItem';
 
@@ -11,7 +10,6 @@ export class CartService {
   private cart: ShoppingCartItem[] = [];
 
   constructor() { }
-  @Output() newCartEvent: EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
 
   getCart(): ShoppingCartItem[] {
     this.cart = JSON.parse(localStorage.getItem(this.cartName) || "[]");
@@ -37,7 +35,7 @@ export class CartService {
         }
       }
     })
-    if (!productFound) {
+    if (!productFound && newItem.amount > 0) {
       this.cart.push(newItem);
     }
     this.saveCart();

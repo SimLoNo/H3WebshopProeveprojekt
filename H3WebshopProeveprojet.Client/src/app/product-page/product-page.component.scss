@@ -1,0 +1,21 @@
+.flex-container{
+    display: flex;
+    margin-top: 4%;
+    text-align: center;
+    align-items: center;
+}
+.imageDiv{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    border: 2px solid black;
+    height: 50vh;
+    width: 50vh;
+    margin: 2%;
+    img{
+        text-align: center;
+        align-items: center;
+        max-height: 100%;
+        max-width: 100%;
+    }
+}

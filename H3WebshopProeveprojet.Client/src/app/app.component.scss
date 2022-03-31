@@ -68,8 +68,11 @@ nav{
   }
   #cartItem{
     height: 10vh;
+    width: 15vh;
+    text-align: center;
     img{
-    height: 80%;
+    max-height: 80%;
+    max-width: 80%;
     }
   }
 
@@ -82,3 +85,9 @@ nav{
   
   /* Show the dropdown menu on hover */
   .dropdownCart:hover .dropdown-content {display: block;}
+  .flex-container{
+    display: flex;
+    margin-right: 0%;
+    margin-top: 0.5%;
+    border-bottom: 2px solid black;
+}
