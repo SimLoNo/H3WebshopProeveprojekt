@@ -28,18 +28,19 @@ export class ProductPagesComponent implements OnInit {
         }
       })
   }
-  @Output() newCartEvent:EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
+  @Output() newCartEvent: EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
 
-  addProductToCart(product: Product){
-    let cartItem:ShoppingCartItem = {
-      amount:1,
-      item:product};
+  addProductToCart(product: Product) {
+    let cartItem: ShoppingCartItem = {
+      amount: 1,
+      item: product
+    };
     console.log(`addProductToCart is running, newCartEvent should fire. Product: ${product.name}, shoppingCartItem: ${cartItem.amount}.`);
     //this.cartService.addToCart(cartItem);
     console.log(cartItem);
     console.log(this.newCartEvent);
-    let newCart:ShoppingCartItem[] = this.cartService.addToCart(cartItem);
-    console.log("Event variable: " + typeof(this.newCartEvent));
+    let newCart: ShoppingCartItem[] = this.cartService.addToCart(cartItem);
+    console.log("Event variable: " + typeof (this.newCartEvent));
     this.newCartEvent.emit(newCart);
     console.log("addProductToCart is running, newCartEvent is fired.");
   }

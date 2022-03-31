@@ -11,7 +11,7 @@ export class CartService {
   private cart: ShoppingCartItem[] = [];
 
   constructor() { }
-  @Output() newCartEvent:EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
+  @Output() newCartEvent: EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
 
   getCart(): ShoppingCartItem[] {
     this.cart = JSON.parse(localStorage.getItem(this.cartName) || "[]");
@@ -22,7 +22,7 @@ export class CartService {
     localStorage.setItem(this.cartName, JSON.stringify(this.cart));
   }
 
-  addToCart(newItem:ShoppingCartItem): ShoppingCartItem[] {
+  addToCart(newItem: ShoppingCartItem): ShoppingCartItem[] {
     this.getCart();
 
     let productFound = false;
@@ -44,18 +44,18 @@ export class CartService {
     return this.cart;
   }
 
-  updateToCart(updateItem:ShoppingCartItem[]):ShoppingCartItem[]{
+  updateToCart(updateItem: ShoppingCartItem[]): ShoppingCartItem[] {
     this.getCart();
     let productsFound = false;
 
     this.cart.forEach(cartItem => {
-      updateItem.forEach(newItem =>{
+      updateItem.forEach(newItem => {
         if (cartItem.item.id === newItem.item.id && typeof newItem.amount == "number") {
           productsFound = true;
           if (newItem.amount <= 0) {
             this.removeItemFromCart(newItem.item.id);
           }
-          else{
+          else {
             cartItem.amount = newItem.amount;
           }
         }

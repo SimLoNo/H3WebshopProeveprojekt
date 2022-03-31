@@ -9,7 +9,7 @@ import { AccountService } from '../_services/account.service';
 })
 export class LoginPageComponent implements OnInit {
 
-  constructor(private accountService:AccountService) { }
+  constructor(private accountService: AccountService) { }
 
   account: Account = { id: 0, username: '', password: '', userFirstName: '', userLastName: '', accountRoleId: 0 };
 
@@ -17,9 +17,9 @@ export class LoginPageComponent implements OnInit {
   }
   login(): void {
     let jwt = this.accountService.authenticate(this.account)
-    .subscribe(x => {
-      console.log(x.token);
-    });
+      .subscribe(x => {
+        console.log(x.token);
+      });
   }
 
 }

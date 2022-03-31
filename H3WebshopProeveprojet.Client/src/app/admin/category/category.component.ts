@@ -12,7 +12,7 @@ export class CategoryComponent implements OnInit {
   constructor(private categoryService: CategoryService) { }
 
   categories: Category[] = [];
-  category: Category = { id: 0, categoryName: '', products: []};
+  category: Category = { id: 0, categoryName: '', products: [] };
   message: string = '';
 
   ngOnInit(): void {
@@ -43,9 +43,9 @@ export class CategoryComponent implements OnInit {
         .subscribe({
           next: (x) => {
             this.categories.push(x);
-            this.category = { id: 0, categoryName: '', products: []};
+            this.category = { id: 0, categoryName: '', products: [] };
           },
-          error:(err) =>{
+          error: (err) => {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
@@ -59,15 +59,15 @@ export class CategoryComponent implements OnInit {
             this.message = Object.values(err.error.errors).join(", ");
           },
           complete: () => {
-            this.category = { id: 0, categoryName: '', products: []};
+            this.category = { id: 0, categoryName: '', products: [] };
           }
         })
     }
   }
 
   cancel(): void {
-    this.message='';
-    this.category = { id: 0, categoryName: '', products: []};
+    this.message = '';
+    this.category = { id: 0, categoryName: '', products: [] };
   }
 
 }

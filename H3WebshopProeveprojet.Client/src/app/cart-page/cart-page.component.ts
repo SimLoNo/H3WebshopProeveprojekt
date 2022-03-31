@@ -24,7 +24,7 @@ export class CartPageComponent implements OnInit {
     // }
   }
 
-  deleteItem(id:number){
+  deleteItem(id: number) {
     console.log("Type of Id: " + typeof id + " id: " + id);
     this.shoppingCart = this.cartService.removeItemFromCart(id);
     this.shoppingCart.forEach(item => {
@@ -32,7 +32,7 @@ export class CartPageComponent implements OnInit {
     })
 
   }
-  updateProductToCart(){
+  updateProductToCart() {
     this.shoppingCart.forEach(item => {
       if (item.amount <= 0) {
         console.log("id is: " + item.item.id + " name is: " + item.item.name);

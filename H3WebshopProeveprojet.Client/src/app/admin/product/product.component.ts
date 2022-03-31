@@ -12,7 +12,7 @@ import { ProductService } from 'src/app/_services/product.service';
 export class ProductComponent implements OnInit {
 
   products: Product[] = [];
-  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage:'' };
+  product: Product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage: '' };
   categories: Category[] = [];
   message: string = '';
 
@@ -49,9 +49,9 @@ export class ProductComponent implements OnInit {
         .subscribe({
           next: (x) => {
             this.products.push(x);
-            this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage:'' };
+            this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage: '' };
           },
-          error:(err) =>{
+          error: (err) => {
             console.log(err.error);
             this.message = Object.values(err.error.errors).join(", ");
           }
@@ -65,14 +65,14 @@ export class ProductComponent implements OnInit {
             this.message = Object.values(err.error.errors).join(", ");
           },
           complete: () => {
-            this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage:'' };
+            this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage: '' };
           }
         })
     }
   }
 
   cancel(): void {
-    this.message='';
-    this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage:'' };
+    this.message = '';
+    this.product = { id: 0, name: '', price: 0, discountPercentage: 0, categoryId: 0, productImage: '' };
   }
 }

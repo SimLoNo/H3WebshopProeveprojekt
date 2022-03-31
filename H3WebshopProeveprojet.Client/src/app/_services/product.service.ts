@@ -29,23 +29,23 @@ export class ProductService {
 
   AddProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(
-      this.apiUrl, 
-      product, 
+      this.apiUrl,
+      product,
       this.httpOptions);
   }
 
   EditProduct(productId: number, product: Product): Observable<Product> {
     return this.http.put<Product>(
       `${this.apiUrl}/${productId}`,
-       product, 
-       this.httpOptions);
+      product,
+      this.httpOptions);
 
   }
 
   DeleteProduct(productId: Number): Observable<Product> {
     return this.http.delete<Product>(
       `${this.apiUrl}/${productId}`,
-       this.httpOptions);
+      this.httpOptions);
 
   }
 }

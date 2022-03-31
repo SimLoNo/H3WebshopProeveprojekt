@@ -10,13 +10,13 @@ import { Jwt } from '../_models/jwt';
 })
 export class AccountService {
   private apiUrl = environment.apiUrl + 'JwtAuthentication';
-  
-  private httpOptions = {
-    headers: new HttpHeaders({'Content-Type': 'application/json'})
-  };
-  constructor(private http:HttpClient) { }
 
-  authenticate(account:Account):Observable<Jwt>{ //:Observable<string>
+  private httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+  constructor(private http: HttpClient) { }
+
+  authenticate(account: Account): Observable<Jwt> { //:Observable<string>
     return this.http.post<Jwt>(this.apiUrl,
       account,
       this.httpOptions);
