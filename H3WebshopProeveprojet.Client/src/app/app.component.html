@@ -1,0 +1,32 @@
+<app-product-pages (newCartEvent)="updateCart($event)"></app-product-pages>
+<div id="banner">
+  <h1 >FolletShop</h1>
+  <nav>
+    <a routerLink="/">Home</a> |
+    <div class="dropdown">
+      <button class="dropbtn">Dropdown</button>
+      <div class="dropdown-content" >
+        <div *ngFor="let category of categories">
+          <a routerLink="/products/{{category.id}}">{{category.categoryName}}</a>
+        </div>
+      </div>
+    </div> |
+    <a routerLink="/admin/product">Admin product</a> |
+    <a routerLink="/admin/category">Admin category</a> |
+    <a routerLink="/cart">
+      <div class="dropdownCart">
+        <button class="dropbtn" id="iconButton">
+          <img src="../../assets/shoppingCart.png" id="cartIcon" alt="">
+        </button>
+        <div class="dropdown-content">
+          <div *ngFor="let product of shoppingCart" id="cartItem">
+            <img src='../../assets/{{product.item.productImage}}.png' alt="">
+            {{product.amount}}, {{product.item.name}} - {{product.item.price * product.amount}}
+          </div>
+        </div>
+      </div>
+    </a>
+  </nav>
+</div>
+
+<router-outlet></router-outlet>

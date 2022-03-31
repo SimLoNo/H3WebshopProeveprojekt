@@ -1,0 +1,13 @@
+<div>
+    <a routerLink="/product/{{product.id}}">
+        <img class="img" src='../../assets/{{product.productImage}}.png' alt="" onerror="this.src='../../assets/unknownItem.png';" > <!--   ../../assets/{{product.productImage}}.png -->
+    </a>
+</div>
+<div>
+    {{product.name}}, {{product.price}}
+    <div>
+        <label>Amount</label>
+        <input [(ngModel)]="amount" type="number">
+        <button (click)="addProductToCart(product)">add</button>
+    </div>
+</div>

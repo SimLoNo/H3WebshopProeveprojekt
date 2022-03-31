@@ -19,7 +19,10 @@ namespace H3WebshopProeveprojekt.Api.Database.Entities
         public int DiscountPercentage { get; set; }
 
         [Column(TypeName = "int")]
-        public int CategoryId { get; set; } 
+        public int CategoryId { get; set; }
+
+        [Column(TypeName ="nvarchar(30)")]
+        public string ProductImage { get; set; }
 
 
         public Category Category { get; set; }

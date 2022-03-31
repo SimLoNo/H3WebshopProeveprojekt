@@ -8,7 +8,7 @@ namespace H3WebshopProeveprojekt.Api.Database.Entities
     {
         [Key]
         public int Id { get; set; }
-        [Column(TypeName="nvarchar(20")]
+        [Column(TypeName= "nvarchar(20)")]
         public string Name { get; set; }
 
 

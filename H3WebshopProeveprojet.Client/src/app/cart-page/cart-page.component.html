@@ -1,0 +1,20 @@
+<div *ngFor="let product of shoppingCart">
+    <div  class="flex-container">
+        <div id="item">
+            <img src='../../assets/{{product.item.productImage}}.png' alt="">
+        </div>
+        <div id="testDiv">
+            <h3>{{product.item.name}}</h3>
+            <p>Amount: {{product.amount}}, individual price: {{product.item.price}}</p>
+        </div>
+        <div>
+            <div>
+                <label>Amount</label>
+                <input [(ngModel)]="product.amount" type="number">
+            </div>
+            <button (click)="deleteItem(product.item.id)">remove item</button>
+        </div>
+    </div>
+</div>
+
+<button (click)="updateProductToCart()">save cart</button>

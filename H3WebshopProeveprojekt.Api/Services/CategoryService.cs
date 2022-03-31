@@ -88,6 +88,7 @@ namespace H3WebshopProeveprojekt.Api.Services
                     Price = product.Price,
                     DiscountPercentage = product.DiscountPercentage,
                     CategoryId = product.CategoryId,
+                    ProductImage = product.ProductImage,
 
                 }).ToList()
             };

@@ -61,6 +61,7 @@ namespace H3WebshopProeveprojekt.Api.Repositories
                 updateProduct.Price = product.Price;
                 updateProduct.DiscountPercentage = product.DiscountPercentage;
                 updateProduct.CategoryId = product.CategoryId;
+                updateProduct.ProductImage = product.ProductImage;
                 await _context.SaveChangesAsync();
                 int categoryId = product.CategoryId;
                 updateProduct.Category = await _context.Category.FirstOrDefaultAsync(c => c.Id == categoryId);

@@ -42,6 +42,8 @@ namespace H3WebshopProeveprojekt.Api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AccountRoleId");
+
                     b.ToTable("Account");
                 });
 
@@ -53,7 +55,7 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -106,6 +108,9 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("ProductImage")
+                        .HasColumnType("nvarchar(30)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
@@ -147,6 +152,17 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                         });
                 });
 
+            modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.Account", b =>
+                {
+                    b.HasOne("H3WebshopProeveprojekt.Api.Database.Entities.AccountRole", "AccountRole")
+                        .WithMany("Accounts")
+                        .HasForeignKey("AccountRoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AccountRole");
+                });
+
             modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.Product", b =>
                 {
                     b.HasOne("H3WebshopProeveprojekt.Api.Database.Entities.Category", "Category")
@@ -156,6 +172,11 @@ namespace H3WebshopProeveprojekt.Api.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.AccountRole", b =>
+                {
+                    b.Navigation("Accounts");
                 });
 
             modelBuilder.Entity("H3WebshopProeveprojekt.Api.Database.Entities.Category", b =>

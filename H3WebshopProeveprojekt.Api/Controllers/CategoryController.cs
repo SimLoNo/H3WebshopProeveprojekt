@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using H3WebshopProeveprojekt.Api.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace H3WebshopProeveprojekt.Api.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -17,7 +19,7 @@ namespace H3WebshopProeveprojekt.Api.Controllers
         {
             _categoryService = categoryService;
         }
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
@@ -40,6 +42,8 @@ namespace H3WebshopProeveprojekt.Api.Controllers
                 return Problem(ex.Message);
             }
         }
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById([FromRoute] int id)
         {
