@@ -15,10 +15,30 @@ export class CartPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.shoppingCart = this.cartService.getCart();
-    if (this.shoppingCart.length == 0) {
-      this.shoppingCart.push({ amount: 2, item: { id: 0, name: 'Test1', price: 10, discountPercentage: 0, categoryId: 0, productImage: 'carisDress' } })
-      this.shoppingCart.push({ amount: 1, item: { id: 0, name: 'Dress', price: 10, discountPercentage: 0, categoryId: 0, productImage: 'carisDress' } })
-    }
+    this.shoppingCart.forEach(item => {
+      console.log(item.item.name);
+    })
+    // if (this.shoppingCart.length == 0) {
+    //   this.shoppingCart.push({ amount: 2, item: { id: 0, name: 'Test1', price: 10, discountPercentage: 0, categoryId: 0, productImage: 'carisDress' } })
+    //   this.shoppingCart.push({ amount: 1, item: { id: 0, name: 'Dress', price: 10, discountPercentage: 0, categoryId: 0, productImage: 'carisDress' } })
+    // }
+  }
+
+  deleteItem(id:number){
+    console.log("Type of Id: " + typeof id + " id: " + id);
+    this.shoppingCart = this.cartService.removeItemFromCart(id);
+    this.shoppingCart.forEach(item => {
+      console.log(item.item.name);
+    })
+
+  }
+  updateProductToCart(){
+    this.shoppingCart.forEach(item => {
+      if (item.amount <= 0) {
+        console.log("id is: " + item.item.id + " name is: " + item.item.name);
+      }
+    });
+    this.shoppingCart = this.cartService.updateToCart(this.shoppingCart);
   }
 
 }

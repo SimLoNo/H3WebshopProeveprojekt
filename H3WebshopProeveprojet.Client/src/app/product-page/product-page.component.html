@@ -5,4 +5,9 @@
 </div>
 <div>
     {{product.name}}, {{product.price}}
+    <div>
+        <label>Amount</label>
+        <input [(ngModel)]="amount" type="number">
+        <button (click)="addProductToCart(product)">add</button>
+    </div>
 </div>

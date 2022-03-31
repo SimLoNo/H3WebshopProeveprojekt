@@ -17,7 +17,6 @@ export class ProductPagesComponent implements OnInit {
   constructor(private categoryService: CategoryService, private route: ActivatedRoute, private cartService: CartService) { }
   category: Category = { id: 0, categoryName: '', products: [] };
   categoryId: Number = 0;
-  @Output() newCartEvent = new EventEmitter<ShoppingCartItem>();
 
   ngOnInit(): void {
     this.route.paramMap
@@ -29,16 +28,22 @@ export class ProductPagesComponent implements OnInit {
         }
       })
   }
+  @Output() newCartEvent:EventEmitter<ShoppingCartItem[]> = new EventEmitter<ShoppingCartItem[]>();
 
-  addProductToCart(product: Product): void {
+  addProductToCart(product: Product){
     let cartItem:ShoppingCartItem = {
       amount:1,
       item:product};
     console.log(`addProductToCart is running, newCartEvent should fire. Product: ${product.name}, shoppingCartItem: ${cartItem.amount}.`);
     //this.cartService.addToCart(cartItem);
-    this.newCartEvent.emit(cartItem);
+    console.log(cartItem);
+    console.log(this.newCartEvent);
+    let newCart:ShoppingCartItem[] = this.cartService.addToCart(cartItem);
+    console.log("Event variable: " + typeof(this.newCartEvent));
+    this.newCartEvent.emit(newCart);
     console.log("addProductToCart is running, newCartEvent is fired.");
   }
+
 
 
 }

@@ -29,9 +29,10 @@ shoppingCart:ShoppingCartItem[] = [];
     // this.shoppingCart.push({amount:1,item:{id:0,name:'Dress',price:10,discountPercentage:0,categoryId:0,productImage:'carisDress'}})
   }
 
-  updateCart(){ //item:ShoppingCartItem
+  updateCart(item:ShoppingCartItem[]){ //
     console.log("updateCart is running.");
     //this.shoppingCart.push(item); // = this.cartService.addToCart(item); // item;
 
   }
+
 }

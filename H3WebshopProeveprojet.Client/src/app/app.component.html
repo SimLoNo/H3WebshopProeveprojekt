@@ -1,4 +1,4 @@
-<app-product-pages (newCartEvent)="updateCart()"></app-product-pages>
+<app-product-pages (newCartEvent)="updateCart($event)"></app-product-pages>
 <div id="banner">
   <h1 >FolletShop</h1>
   <nav>
@@ -13,7 +13,7 @@
     </div> |
     <a routerLink="/admin/product">Admin product</a> |
     <a routerLink="/admin/category">Admin category</a> |
-    <a routerlink="">
+    <a routerLink="/cart">
       <div class="dropdownCart">
         <button class="dropbtn" id="iconButton">
           <img src="../../assets/shoppingCart.png" id="cartIcon" alt="">

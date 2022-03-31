@@ -3,4 +3,7 @@
         <img class="img" src='../../assets/{{product.productImage}}.png' alt="" onerror="this.src='../../assets/unknownItem.png';" > <!--   ../../assets/{{product.productImage}}.png -->
     </a>
     <p>{{product.name}}, {{product.price}} -dkk</p>
+        
+    
+    <button (click)="addProductToCart(product)">add</button>
 </div>
