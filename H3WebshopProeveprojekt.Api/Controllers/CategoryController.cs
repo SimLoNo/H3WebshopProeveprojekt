@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace H3WebshopProeveprojekt.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoryController : ControllerBase
@@ -19,7 +18,6 @@ namespace H3WebshopProeveprojekt.Api.Controllers
         {
             _categoryService = categoryService;
         }
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllCategories()
         {
@@ -43,7 +41,6 @@ namespace H3WebshopProeveprojekt.Api.Controllers
             }
         }
 
-        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetCategoryById([FromRoute] int id)
         {
